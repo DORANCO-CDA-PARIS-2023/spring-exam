@@ -59,6 +59,13 @@ public class ApiController {
         return new ResponseEntity<>(new Payload("Livre supprimé"), HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/authors")
+    public ResponseEntity<List<Author>> findAuthorsByName(@RequestParam String name) {
+        List<Author> authors = authorRepository.findByNameContaining(name);
+        return new ResponseEntity<>(authors, HttpStatus.OK);
+    }
+
+
     @GetMapping("/books?title={title}&author={author}&publisher={publisher}")
     public ResponseEntity<List<Book>> findBooksByCriteria(
             @RequestParam(required = false) String title,
