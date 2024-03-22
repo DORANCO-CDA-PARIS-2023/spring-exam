@@ -78,5 +78,17 @@ public class ApiController {
         authors.add(newAuthor);
         return ResponseEntity.status(HttpStatus.CREATED).body(newAuthor);
     }
+    @PutMapping("/authors/{authorId}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long authorId, @RequestBody Author updatedAuthor) {
+        Author existingAuthor = authors.stream().filter(author -> author.getId().equals(authorId)).findFirst().orElse(null);
+        if (existingAuthor != null) {
+            // Update the existing book
+            existingAuthor.setName(updatedAuthor.getName());
+            existingAuthor.setBiography(updatedAuthor.getBiography());
 
+            return ResponseEntity.ok(existingAuthor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
