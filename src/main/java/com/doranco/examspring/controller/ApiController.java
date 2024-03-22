@@ -107,4 +107,12 @@ public class ApiController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/authors?name={name}")
+    public ResponseEntity<List<Author>> searchAuthors(@RequestParam(required = false) String name) {
+        List<Author> filteredAuthors = authors.stream()
+                .filter(author -> name == null || author.getName().contains(name))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(filteredAuthors);
+    }
 }
