@@ -3,8 +3,6 @@ package com.doranco.examspring.model.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "borrowing")
@@ -14,8 +12,8 @@ public class Borrowing {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "book", length = 100, nullable = false)
-    private String book;
+    @Column(name = "book_id", length = 100, nullable = false)
+    private Long bookId;
     @Column(name = "borrow_date", nullable = false)
     private LocalDate borrowDate;
     @Column(name = "due_date", nullable = false)
@@ -25,8 +23,8 @@ public class Borrowing {
 
     }
 
-    public Borrowing(String book, LocalDate borrowDate, LocalDate dueDate) {
-        this.book = book;
+    public Borrowing(Long bookId, LocalDate borrowDate, LocalDate dueDate) {
+        this.bookId = bookId;
         this.borrowDate = borrowDate;
         this.dueDate = dueDate;
     }
@@ -39,12 +37,12 @@ public class Borrowing {
         return id;
     }
 
-    public String getBook() {
-        return book;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBook(String book) {
-        this.book = book;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public LocalDate getBorrowDate() {
@@ -67,7 +65,7 @@ public class Borrowing {
     public String toString() {
         return "Borrowing{" +
                 "id=" + id +
-                ", book='" + book + '\'' +
+                ", book='" + bookId + '\'' +
                 ", borrowDate=" + borrowDate +
                 ", dueDate=" + dueDate +
                 '}';

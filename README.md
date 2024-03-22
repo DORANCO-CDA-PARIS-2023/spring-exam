@@ -15,10 +15,10 @@ Les fonctionnalités attendues sont les suivantes :
 - [x] Mettre à jour les informations d'un auteur existant.
 - [x] Supprimer un auteur de la bibliothèque.
 - [x] Rechercher des auteurs par nom.
-- [ ] Ajouter un nouvel emprunt avec le livre emprunté, la date d'emprunt et la date de retour prévue.
-- [ ] Mettre à jour les informations d'un emprunt existant.
-- [ ] Supprimer un emprunt de la bibliothèque.
-- [ ] Rechercher des emprunts en cours ou passés.
+- [x] Ajouter un nouvel emprunt avec le livre emprunté, la date d'emprunt et la date de retour prévue.
+- [x] Mettre à jour les informations d'un emprunt existant.
+- [x] Supprimer un emprunt de la bibliothèque.
+- [x] Rechercher des emprunts en cours ou passés.
 
 ## Documentation 
 Voici une liste de routes et de descriptions pour l'API REST de gestion de bibliothèque décrite précédemment :
