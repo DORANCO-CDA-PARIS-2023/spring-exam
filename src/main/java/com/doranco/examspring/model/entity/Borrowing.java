@@ -2,8 +2,19 @@ package com.doranco.examspring.model.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity @Table
 public class Borrowing {
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private int ind;
 	private int bookId;
 	private LocalDate borrowDate;
