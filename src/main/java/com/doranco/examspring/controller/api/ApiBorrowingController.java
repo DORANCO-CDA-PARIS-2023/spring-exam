@@ -69,12 +69,11 @@ public class ApiBorrowingController {
 			@RequestParam String name) {
 		Payload payload = new Payload();
 		 List<Book> books = borrowingRepository.getBookDueDateDepasse();
-		// Borrowing borrowing = (Borrowing) borrowingRepository.findByName(name);
-		// if (borrowing == null) {
-		// payload.setMessage("Borrowing not found");
-		// return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
-		// }
-		// payload.setData(borrowing);
+		 if (books == null) {
+			             payload.setMessage("Book not found");
+			             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
+		 }
+		 payload.setData(books);
 		return new ResponseEntity<>(payload, HttpStatus.OK);
 	}
 
