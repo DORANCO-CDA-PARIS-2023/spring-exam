@@ -3,6 +3,7 @@ package com.doranco.examspring.controller;
 import com.doranco.examspring.model.entity.Author;
 import com.doranco.examspring.model.entity.Book;
 import com.doranco.examspring.model.entity.Borrowing;
+import com.doranco.examspring.repo.AuthorRepo;
 import com.doranco.examspring.repo.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +18,21 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-    private List<Book> books = new ArrayList<>();
-    private List<Author> authors = new ArrayList<>();
-    private List<Borrowing> loans = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
+    private final List<Author> authors = new ArrayList<>();
+    private final List<Borrowing> loans = new ArrayList<>();
     private final AtomicLong bookIdGenerator = new AtomicLong(1);
     private final AtomicLong authorIdGenerator = new AtomicLong(1);
 
     BookRepo bookRepo;
+    AuthorRepo authorRepo;
     @Autowired
-    public ApiController(BookRepo bookRepo){
+    public ApiController(BookRepo bookRepo,AuthorRepo authorRepo){
         this.bookRepo=bookRepo;
+        this.authorRepo=authorRepo;
     }
+
+
 
     @PostMapping("/books")
     public ResponseEntity<Book> addBook(@RequestBody Book newBook) {
@@ -58,6 +63,7 @@ public class ApiController {
         Book bookToDelete = findBookById(bookId);
         if (bookToDelete != null) {
             books.remove(bookToDelete);
+            bookRepo.delete(bookToDelete);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -85,6 +91,7 @@ public class ApiController {
     public ResponseEntity<Author> addAuthor(@RequestBody Author newAuthor) {
         newAuthor.setId(authorIdGenerator.getAndIncrement());
         authors.add(newAuthor);
+        authorRepo.add(newAuthor);
         return ResponseEntity.status(HttpStatus.CREATED).body(newAuthor);
     }
     @PutMapping("/authors/{authorId}")

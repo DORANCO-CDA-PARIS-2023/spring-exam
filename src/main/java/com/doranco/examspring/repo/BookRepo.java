@@ -12,6 +12,8 @@ default void add(Book book){
     save(book);
 }
 
-
+default void delete(Book book) {
+    delete(book);
+}
 
 }
