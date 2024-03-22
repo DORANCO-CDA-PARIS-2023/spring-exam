@@ -2,8 +2,10 @@ package com.doranco.examspring.controller;
 
 import com.doranco.examspring.model.entity.Author;
 import com.doranco.examspring.model.entity.Book;
+import com.doranco.examspring.model.entity.Borrowing;
 import com.doranco.examspring.repository.BookRepository;
 import com.doranco.examspring.repository.AuthorRepository;
+import com.doranco.examspring.repository.BorrowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,13 @@ public class ApiController {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final BorrowingRepository borrowingRepository;
 
     @Autowired
-    public ApiController(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public ApiController(BookRepository bookRepository, AuthorRepository authorRepository, BorrowingRepository borrowingRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.borrowingRepository = borrowingRepository;
     }
 
     @PostMapping
@@ -113,5 +117,40 @@ public class ApiController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+    @PostMapping
+    public ResponseEntity<String> addBorrowing(@RequestBody Borrowing borrowing) {
+        Borrowing savedBorrowing = borrowingRepository.save(borrowing);
+        if (savedBorrowing != null) {
+            return new ResponseEntity<>("Emprunt ajouté", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Échec dans l'ajout de l'emprunt", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{borrowingId}")
+    public ResponseEntity<String> updateBorrowing(@PathVariable Long borrowingId, @RequestBody Borrowing updatedBorrowing) {
+        if (!borrowingRepository.existsById(borrowingId)) {
+            return new ResponseEntity<>("Emprunt inexistant", HttpStatus.NOT_FOUND);
+        }
+        updatedBorrowing.setId(borrowingId);
+        borrowingRepository.save(updatedBorrowing);
+
+        return new ResponseEntity<>("Emprunt mis à jour", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{borrowingId}")
+    public ResponseEntity<String> deleteBorrowing(@PathVariable Long borrowingId) {
+        if (borrowingRepository.existsById(borrowingId)) {
+            borrowingRepository.deleteById(borrowingId);
+            return new ResponseEntity<>("Emprunt supprimé", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Emprunt inexistant", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Borrowing>> searchBorrowings() {
+        return null;
     }
 }
