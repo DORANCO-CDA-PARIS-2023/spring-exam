@@ -11,10 +11,10 @@ Les fonctionnalités attendues sont les suivantes :
 - [x] Mettre à jour les informations d'un livre existant.
 - [x] Supprimer un livre de la bibliothèque.
 - [x] Rechercher des livres par titre, auteur ou éditeur.
-- [ ] Ajouter un nouvel auteur avec son nom et sa biographie.
-- [ ] Mettre à jour les informations d'un auteur existant.
-- [ ] Supprimer un auteur de la bibliothèque.
-- [ ] Rechercher des auteurs par nom.
+- [x] Ajouter un nouvel auteur avec son nom et sa biographie.
+- [x] Mettre à jour les informations d'un auteur existant.
+- [x] Supprimer un auteur de la bibliothèque.
+- [x] Rechercher des auteurs par nom.
 - [ ] Ajouter un nouvel emprunt avec le livre emprunté, la date d'emprunt et la date de retour prévue.
 - [ ] Mettre à jour les informations d'un emprunt existant.
 - [ ] Supprimer un emprunt de la bibliothèque.
