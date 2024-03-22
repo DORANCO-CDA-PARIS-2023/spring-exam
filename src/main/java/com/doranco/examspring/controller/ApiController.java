@@ -4,6 +4,7 @@ import com.doranco.examspring.model.entity.Author;
 import com.doranco.examspring.model.entity.Book;
 import com.doranco.examspring.model.entity.Borrowing;
 import com.doranco.examspring.repo.BookRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class ApiController {
     private final AtomicLong authorIdGenerator = new AtomicLong(1);
 
     BookRepo bookRepo;
+    @Autowired
+    public ApiController(BookRepo bookRepo){
+        this.bookRepo=bookRepo;
+    }
+
     @PostMapping("/books")
     public ResponseEntity<Book> addBook(@RequestBody Book newBook) {
 
