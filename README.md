@@ -7,18 +7,18 @@ L'objectif de cet exercice est de concevoir et de développer une API REST pour 
 
 Les fonctionnalités attendues sont les suivantes :
 
-- Ajouter un nouveau livre avec son titre, son auteur, son éditeur, son année de publication et son nombre de pages.
-- Mettre à jour les informations d'un livre existant.
-- Supprimer un livre de la bibliothèque.
-- Rechercher des livres par titre, auteur ou éditeur.
-- Ajouter un nouvel auteur avec son nom et sa biographie.
-- Mettre à jour les informations d'un auteur existant.
-- Supprimer un auteur de la bibliothèque.
-- Rechercher des auteurs par nom.
-- Ajouter un nouvel emprunt avec le livre emprunté, la date d'emprunt et la date de retour prévue.
-- Mettre à jour les informations d'un emprunt existant.
-- Supprimer un emprunt de la bibliothèque.
-- Rechercher des emprunts en cours ou passés.
+- [x] Mettre à jour les informations d'un livre existant.
+- [x] Mettre à jour les informations d'un livre existant.
+- [x] Supprimer un livre de la bibliothèque.
+- [x] Rechercher des livres par titre, auteur ou éditeur.
+- [ ] Ajouter un nouvel auteur avec son nom et sa biographie.
+- [ ] Mettre à jour les informations d'un auteur existant.
+- [ ] Supprimer un auteur de la bibliothèque.
+- [ ] Rechercher des auteurs par nom.
+- [ ] Ajouter un nouvel emprunt avec le livre emprunté, la date d'emprunt et la date de retour prévue.
+- [ ] Mettre à jour les informations d'un emprunt existant.
+- [ ] Supprimer un emprunt de la bibliothèque.
+- [ ] Rechercher des emprunts en cours ou passés.
 
 ## Documentation 
 Voici une liste de routes et de descriptions pour l'API REST de gestion de bibliothèque décrite précédemment :
