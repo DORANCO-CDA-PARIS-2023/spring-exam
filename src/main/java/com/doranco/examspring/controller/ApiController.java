@@ -26,6 +26,7 @@ public class ApiController {
     public ResponseEntity<Book> addBook(@RequestBody Book newBook) {
 
         books.add(newBook);
+        System.out.println(newBook);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBook);
     }
 
