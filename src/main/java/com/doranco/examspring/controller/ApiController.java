@@ -29,7 +29,7 @@ public class ApiController {
         this.authorRepository = authorRepository;
         this.borrowingRepository = borrowingRepository;
     }
-
+    
     @PostMapping("/authors")
     public ResponseEntity<Payload> addAuthor(@RequestBody Author author) {
         Author savedAuthor = authorRepository.save(author);
@@ -124,7 +124,7 @@ public class ApiController {
     @PostMapping("/books")
     public ResponseEntity<Payload> addBook(@RequestBody Book book) {
         Book savedBook = bookRepository.save(book);
-        return new ResponseEntity<>(new Payload(" 201 Created", savedBook), HttpStatus.CREATED);
+        return new ResponseEntity<>(new Payload("Book Created", savedBook), HttpStatus.CREATED);
     }
 
     @PutMapping("/books/{bookId}")
