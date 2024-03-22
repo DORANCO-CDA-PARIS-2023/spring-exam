@@ -9,66 +9,69 @@ import jakarta.persistence.*;
 @Table(name = "borrowing")
 public class Borrowing {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "borrowing_id")
-    private List<Book> books;
+	@OneToMany
+	@JoinColumn(name = "borrowing_id")
+	private List<Book> books;
 
-    @Column(name = "borrow_date")
-    private LocalDate borrowDate;
+	@Column(name = "borrow_date")
+	private LocalDate borrowDate;
 
-    @Column(name = "due_date")
-    private LocalDate dueDate;
+	@Column(name = "due_date")
+	private LocalDate dueDate;
 
-    public Borrowing() {
-        this.borrowDate = LocalDate.now();
-    }
+	private boolean returned;
 
-    public Borrowing(List<Book> books, LocalDate borrowDate, LocalDate dueDate) {
-        this();
-        this.books = books;
-        this.dueDate = dueDate;
-    }
+	public Borrowing() {
+		this.borrowDate = LocalDate.now();
+		this.returned = false;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Borrowing(List<Book> books, LocalDate dueDate) {
+		this();
+		this.books = books;
+		this.dueDate = dueDate;
+	}
 
-    public List<Book> getBooks() {
-        return books;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
+	public List<Book> getBooks() {
+		return books;
+	}
 
-    public LocalDate getBorrowDate() {
-        return borrowDate;
-    }
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 
-    public void setBorrowDate(LocalDate borrowDate) {
-        this.borrowDate = borrowDate;
-    }
+	public LocalDate getBorrowDate() {
+		return borrowDate;
+	}
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+	public void setBorrowDate(LocalDate borrowDate) {
+		this.borrowDate = borrowDate;
+	}
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
 
-    @Override
-    public String toString() {
-        return "Borrowing{" +
-                "id=" + id +
-                ", books=" + books +
-                ", borrowDate=" + borrowDate +
-                ", dueDate=" + dueDate +
-                '}';
-    }
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public boolean isReturned() {
+		return returned= true;
+	}
+
+	@Override
+	public String toString() {
+		return "Borrowing{" + "id=" + id + ", books=" + books + ", borrowDate=" + borrowDate + ", dueDate=" + dueDate
+				+ '}';
+	}
 }
