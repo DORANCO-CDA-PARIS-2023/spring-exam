@@ -1,0 +1,27 @@
+1 - Requête création de livre sur Postman:
+http://127.0.01.:8080/books
+
+Body -> raw -> JSON:
+{
+  "title": "Le Petit Prince",
+  "author": "Antoine de Saint-Exupéry",
+  "publisher": "Gallimard",
+  "publicationYear": 1943,
+  "pageCount": 128
+}
+
+2 - Modifier un livre existant
+http://127.0.01.:8080/books/1
+
+Body -> raw -> JSON:
+{
+  "title": "Le Petit Prince",
+  "author": "Antoine de Saint-Exupéry",
+  "publisher": "Gallimard",
+  "publicationYear": 1943,
+  "pageCount": 99
+}
+
+3 - Supprimer un livre 
+http://127.0.01.:8080/books/1
+

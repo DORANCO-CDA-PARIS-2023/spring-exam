@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.doranco</groupId>
-    <artifactId>examSpring</artifactId>
+    <artifactId>correctionTpApi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>examSpring</name>
-    <description>examSpring</description>
+    <name>correctionTpApi</name>
+    <description>correctionTpApi</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -23,19 +23,9 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>

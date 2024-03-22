@@ -1,0 +1,7 @@
+CREATE DATABASE IF NOT EXISTS exam_doranco_spring;
+
+USE exam_doranco_spring;
+
+CREATE TABLE IF NOT EXISTS book (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255) NOT NULL, author VARCHAR(255) NOT NULL, publisher VARCHAR(255) NOT NULL, publicationYear INT NOT NULL, pageCount INT NOT NULL
+);
