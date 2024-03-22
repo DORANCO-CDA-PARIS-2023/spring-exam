@@ -3,6 +3,7 @@ package com.doranco.examspring.controller;
 import com.doranco.examspring.model.entity.Author;
 import com.doranco.examspring.model.entity.Book;
 import com.doranco.examspring.model.entity.Borrowing;
+import com.doranco.examspring.repo.BookRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,12 @@ public class ApiController {
     private final AtomicLong bookIdGenerator = new AtomicLong(1);
     private final AtomicLong authorIdGenerator = new AtomicLong(1);
 
-
+    BookRepo bookRepo;
     @PostMapping("/books")
     public ResponseEntity<Book> addBook(@RequestBody Book newBook) {
 
         books.add(newBook);
+        bookRepo.add(newBook);
         System.out.println(newBook);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBook);
     }
