@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/books")
 public class ApiController {
@@ -36,5 +39,31 @@ public class ApiController {
         bookRepository.save(updatedBook);
 
         return new ResponseEntity<>("Livre mis a jour", HttpStatus.OK);
+    }
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<String> deleteBook(@PathVariable Long bookId) {
+        if (bookRepository.existsById(bookId)) {
+            bookRepository.deleteById(bookId);
+            return new ResponseEntity<>("Livre supprimé", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Livre inexistant", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam(required = false) String title,
+                                                  @RequestParam(required = false) String author,
+                                                  @RequestParam(required = false) String publisher) {
+        List<Book> books;
+        if (title != null || author != null || publisher != null) {
+            books = bookRepository.findByTitleOrAuthorOrPublisher(title, author, publisher);
+            if (!books.isEmpty()) {
+                return new ResponseEntity<>(books, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
