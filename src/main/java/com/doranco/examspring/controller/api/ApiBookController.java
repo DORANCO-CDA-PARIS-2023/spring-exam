@@ -2,6 +2,8 @@ package com.doranco.examspring.controller.api;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,52 +31,65 @@ public class ApiBookController {
 			return new ResponseEntity<>(payload, HttpStatus.BAD_REQUEST);
 		}
 		payload.setData(book);
+		payload.setMessage("Book created");
 		return new ResponseEntity<>(payload, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Payload> update(@RequestBody Book book, @PathVariable Long id) {
-		Payload payload = new Payload();
-		Book olderBook = bookRepository.findById(id).orElse(null);
-		if (olderBook == null) {
-			payload.setMessage("Book not faond");
-			return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
-		}
-		olderBook.setTitle(book.getTitle());
-		olderBook.setAuthor(book.getAuthor());
-		olderBook.setPublisher(book.getPublisher());
-		olderBook.setPublicationYear(book.getPublicationYear());
-		olderBook.setPageCount(book.getPageCount());
-		payload.setData(olderBook);
+	public ResponseEntity<Payload> updateBook(@RequestBody Book updatedBook, @PathVariable Long id) {
+	    Optional<Book> optionalBook = bookRepository.findById(id);
+	    Payload payload = new Payload();
+	    if (optionalBook.isEmpty()) {
+	    	payload.setMessage("Book not found");
+	    	return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
+	    }
+	    Book existingBook = optionalBook.get();
+	    existingBook.setTitle(updatedBook.getTitle());
+	    existingBook.setAuthor(updatedBook.getAuthor());
+	    existingBook.setPublisher(updatedBook.getPublisher());
+	    existingBook.setPublicationYear(updatedBook.getPublicationYear());
+	    existingBook.setPageCount(updatedBook.getPageCount());
+	    existingBook = bookRepository.save(existingBook);
+		payload.setData(existingBook);
+		payload.setMessage("Book updated");
 		return new ResponseEntity<>(payload, HttpStatus.OK);
+	
 	}
+
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Payload> delete(@PathVariable Long id) {
+	public ResponseEntity<Payload> deleteBook(@PathVariable Long id) {
 		Payload payload = new Payload();
-		Book book = bookRepository.findById(id).orElse(null);
-		if (book == null) {
-			payload.setMessage("Book not found");
-			return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
-		}
-		bookRepository.delete(book);
-		payload.setMessage("Book deleted");
-		return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
-	}
-	
-	
-	@GetMapping("/search")
-	public ResponseEntity<Payload> search(@RequestParam String title, @RequestParam String author,
-			@RequestParam String publisher) {
-		List<Book> books = bookRepository.findByTitleOrAuthorOrPublisher(title, author, publisher);
-		Payload payload = new Payload();
-		if (books.isEmpty()) {
-			payload.setMessage("No book found");
+	    Optional<Book> optionalBook = bookRepository.findById(id);
+	    if (optionalBook.isEmpty()) {
+	    	payload.setMessage("Book not found");
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                             .body(payload);
+		} else {
+			Book book = optionalBook.get();
+			bookRepository.delete(book);
+			payload.setMessage("Book deleted");
 			return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
 		}
+	}
+
+	
+	// http://localhost:8080/books/search?keyword=Le Peti
+	@GetMapping("/search")
+	public ResponseEntity<Payload> searchBooks(
+	        @RequestParam(required = false) String keyword) {
+	    
+	    List<Book> books = bookRepository.findByTitleOrAuthorOrPublisher(keyword);
+	    Payload payload = new Payload();
+	    if (books.isEmpty()) {
+			payload.setMessage("No books found");
+			return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
+	    }
 		payload.setData(books);
+		payload.setMessage("Books found");
 		return new ResponseEntity<>(payload, HttpStatus.OK);
 	}
+
 	
 	
 	

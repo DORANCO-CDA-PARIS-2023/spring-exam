@@ -148,8 +148,10 @@ Voici une liste de routes et de descriptions pour l'API REST de gestion de bibli
     ```
 
 12. Rechercher des emprunts en cours ou passés
+
+	
     ```
-    Path : /borrowings?status={status}
+    Path : /borrowings?status={status}  overdue/notReturned
     Méthode : GET
     Payload : aucun
     Status : 200 OK

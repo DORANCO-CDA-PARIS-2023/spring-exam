@@ -15,7 +15,7 @@ public class Borrowing {
 	private Long id;
 
 	@OneToMany
-	@JoinColumn(name = "borrowing_id")
+	@JoinTable(name = "borrowing_book", joinColumns = @JoinColumn(name = "borrowing_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
 	private List<Book> books;
 
 	@Column(name = "borrow_date")
@@ -66,7 +66,7 @@ public class Borrowing {
 	}
 
 	public boolean isReturned() {
-		return returned= true;
+		return returned;
 	}
 
 	@Override
