@@ -35,6 +35,7 @@ public class AuthorApiController {
 
         Optional<Author> authorById = authorRepository.findById(authorId);
         if (authorById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 
@@ -52,6 +53,7 @@ public class AuthorApiController {
 
         Optional<Author> authorById = authorRepository.findById(authorId);
         if (authorById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 

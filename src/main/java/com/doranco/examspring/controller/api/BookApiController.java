@@ -35,6 +35,7 @@ public class BookApiController {
 
         Optional<Book> bookById = bookRepository.findById(bookId);
         if (bookById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 
@@ -56,6 +57,7 @@ public class BookApiController {
 
         Optional<Book> bookById = bookRepository.findById(bookId);
         if (bookById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 

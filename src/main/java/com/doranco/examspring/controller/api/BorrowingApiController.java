@@ -38,6 +38,7 @@ public class BorrowingApiController {
 
         Optional<Borrowing> borrowingById = borrowingRepository.findById(borrowingId);
         if (borrowingById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 
@@ -56,6 +57,7 @@ public class BorrowingApiController {
 
         Optional<Borrowing> borrowingById = borrowingRepository.findById(borrowingId);
         if (borrowingById.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NOT_FOUND);
         }
 
@@ -80,6 +82,7 @@ public class BorrowingApiController {
         }
 
         if (borrowings.isEmpty()) {
+            // UTILISER NO_CONTENT CAR CE N'EST PAS UNE ERREUR
             return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
         }
 
