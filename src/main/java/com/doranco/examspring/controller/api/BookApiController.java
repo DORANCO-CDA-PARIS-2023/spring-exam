@@ -63,6 +63,7 @@ public class BookApiController {
 
         bookRepository.delete(bookById.get());
         payload.setMessage("Book deleted.");
+        // UTILISER OK CAR LA REQUETE EST UN SUCCES
         return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
     }
 

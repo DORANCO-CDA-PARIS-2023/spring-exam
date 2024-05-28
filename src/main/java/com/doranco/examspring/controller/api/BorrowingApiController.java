@@ -63,6 +63,7 @@ public class BorrowingApiController {
 
         borrowingRepository.delete(borrowingById.get());
         payload.setMessage("Borrowing deleted.");
+        // UTILISER OK CAR LA REQUETE EST UN SUCCES
         return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
     }
 

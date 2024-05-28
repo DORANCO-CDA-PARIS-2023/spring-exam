@@ -59,6 +59,7 @@ public class AuthorApiController {
 
         authorRepository.delete(authorById.get());
         payload.setMessage("Author deleted.");
+        // UTILISER OK CAR LA REQUETE EST UN SUCCES
         return new ResponseEntity<>(payload, HttpStatus.NO_CONTENT);
     }
 
